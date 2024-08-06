@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Interactive Map</title>
+  <link href="https://api.mapbox.com/mapbox-gl-js/v3.5.1/mapbox-gl.css" rel="stylesheet">
+</head>
+
+<body>
+  <div id="app">
+    <div id="filter-container">
+      <nav id="filter-group" class="filter-group"></nav>
+      <div class="map-overlay">
+        <div id="feature-listing" class="listing">
+        </div>
+      </div>
+    </div>
+    <div id="map"></div>
+  </div>
+  <script type="module" src="scripts/map.js"></script>
+</body>
+</html>
