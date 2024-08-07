@@ -1,17 +1,9 @@
-body {
-  font-family: 'Helvetica Neue', Arial, Helvetica, sans-serif;
-  margin: 0;
-  padding: 0;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 #app {
   display: flex;
   width: 100%;
-  height: 100%;
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: auto;
 }
 
 #filter-container {
@@ -20,12 +12,17 @@ body {
   flex-direction: column;
   background-color: rgba(255, 255, 255, 0.9);
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+  /* overflow-y: scroll; */
+}
+
+#feature-listing {
   overflow-y: auto;
 }
 
 #map {
   flex: 1; /* Map takes the remaining width */
   position: relative;
+  width: 100%;
 }
 
 .filter-group {
@@ -69,15 +66,20 @@ body {
   font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
   background-color: #efefef;
   padding: 10px;
-  flex-grow: 1; /* Allows the overlay to grow within the sidebar */
+  flex-grow: 1; /*Allows the overlay to grow within the sidebar*/
   overflow-y: auto;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
 }
 
  .map-overlay fieldset {
   background: #ddd;
   border: none;
   padding: 5px;
-   margin: 0 0 10px 0;
+  margin: 0 0 10px 0;
 } 
 
 .map-overlay input {
@@ -114,4 +116,24 @@ body {
 
 .map-overlay .listing a:hover {
   background: #f0f0f0;
+}
+
+@media (max-width: 768px) {
+  #app {
+    flex-direction: column;
+  }
+
+  #filter-container {
+    width: 100%;
+    box-shadow: none;
+  }
+
+  #feature-listing {
+    height: 10vh;
+  }
+
+  #map {
+    height: 100%;
+    width: 100%;
+  }
 }

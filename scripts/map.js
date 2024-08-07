@@ -50,7 +50,7 @@ const map = new mapboxgl.Map({
     center: [-98.5795, 39.8283],
     zoom: 3,
     maxZoom: 8,
-    minZoom: 3,
+    minZoom: 2,
     interactive: true,
 });
 const filterGroup = document.getElementById("filter-group");
