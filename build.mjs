@@ -42,6 +42,17 @@ function findEntryScript(html) {
     return null;
 }
 
+// Function to remove all non-CDN script tags from the HTML
+function removeNonCdnScripts(html) {
+    const scriptTagPattern = /<script\s[^>]*src=["']([^"']+)["'][^>]*><\/script>/gi;
+    return html.replace(scriptTagPattern, (match, src) => {
+        if (!src.startsWith('https://') && !src.startsWith('http://') && !externalModules.some(module => src.includes(module))) {
+            return '';
+        }
+        return match;
+    });
+}
+
 // Function to remove a specific script tag from the HTML
 function removeScriptTag(html, scriptSrc) {
     const scriptTagPattern = new RegExp(`<script\\s[^>]*src=["']${scriptSrc}["'][^>]*><\\/script>`, 'gi');
@@ -79,15 +90,26 @@ async function build() {
     const htmlPath = path.join(__dirname, 'index.html');
     let html = fs.readFileSync(htmlPath, 'utf8');
 
-    // Find the entry script
-    const entryScript = findEntryScript(html);
-    if (!entryScript) {
-        throw new Error('No valid entry script found.');
-    }
-    const entryFile = path.join(__dirname, entryScript);
+    // Check if an entry script argument is provided
+    // eslint-disable-next-line no-undef
+    const entryArg = process.argv[2];
 
-    // Remove the entry script tag from the HTML
-    html = removeScriptTag(html, entryScript);
+    let entryScript;
+    if (entryArg) {
+        // Use the specified entry script and remove all non-CDN scripts
+        entryScript = entryArg;
+        html = removeNonCdnScripts(html);
+    } else {
+        // Find the first non-CDN script
+        entryScript = findEntryScript(html);
+        if (!entryScript) {
+            throw new Error('No valid entry script found.');
+        }
+        // Remove the entry script tag from the HTML
+        html = removeScriptTag(html, entryScript);
+    }
+
+    const entryFile = path.join(__dirname, entryScript);
 
     // Inject CDN links into HTML
     cdnLinks.forEach(link => {
