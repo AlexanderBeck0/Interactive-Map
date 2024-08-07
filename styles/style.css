@@ -118,6 +118,10 @@
   background: #f0f0f0;
 }
 
+a.no-destination-link:hover {
+  cursor: pointer;
+}
+
 @media (max-width: 768px) {
   #app {
     flex-direction: column;

@@ -217,7 +217,7 @@ map.on('load', () => {
         uniqueFeatures.forEach(feature => {
             if (feature.properties.title === undefined) return;
             const featureItem = document.createElement('a');
-            featureItem.href = '#';
+            featureItem.classList.add('no-destination-link');
             featureItem.textContent = feature.properties.title;
 
             featureItem.addEventListener('click', () => {
