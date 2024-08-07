@@ -233,6 +233,7 @@ map.on('load', () => {
     }
 
     createMapEventListeners(createPopupForFeature, updateVisibleFeatures);
+    setTimeout(updateVisibleFeatures, 400);
 });
 
 /**
@@ -280,9 +281,8 @@ function createMapEventListeners(createPopupForFeature, updateVisibleFeatures) {
         document.getElementById('feature-listing').innerHTML = '';
     });
 
-    map.on('moveend', () => {
-        setTimeout(updateVisibleFeatures, 10);
-    });
+    map.on('moveend', () => setTimeout(updateVisibleFeatures, 10));
+    map.on('zoomend', () => setTimeout(updateVisibleFeatures, 50));
 }
 
 /**
