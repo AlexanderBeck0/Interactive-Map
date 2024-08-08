@@ -39,4 +39,4 @@ export const features = [
         'fundedStatus': FUNDED_STATUS.FUNDED,
         'coordinates': [-77.031959, 38.89037],
     },
-]
+]; // End of features
